@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-   
+
     entry: path.resolve(__dirname, 'src', 'index.js'),
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -21,14 +21,25 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                 },
-                // query: {
-                //     presets: ['es2015']
-                // }
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' }
+                ],
+            },
+            {
+                test: /.*\.(gif|png|jpe?g)$/i,
+                //  test: /.*\.(gif|jpe?g|bmp|png)$/igm,
+                use: {
+                    loader: 'file-loader'
+                }
             }
         ]
     },
